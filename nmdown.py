@@ -3,9 +3,9 @@
 
 import re
 import sys
-from cloudmusic import make_songs, make_albums, make_playlists
+from cloudmusic import make_songs, make_albums, make_playlists, make_artists
 from downloader.simple import (
-        download_songs, download_albums, download_playlists)
+        download_songs, download_albums, download_playlists, download_artists)
 
 def print_songs(songs, indent=0):
     for song in songs:
@@ -50,6 +50,9 @@ def down(url):
     elif type == 'playlist':
         playlists = make_playlists([id])
         download_playlists(playlists)
+    elif type == 'artist':
+        artists = make_artists([id])
+        download_artists(artists)
 
 def main():
     for url in sys.argv[1:]:

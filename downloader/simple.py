@@ -103,3 +103,13 @@ def download_playlist(playlist, save_folder='./', best_quality=True):
 def download_playlists(playlists, save_folder='./', best_quality=True):
     for playlist in playlists:
         download_playlist(playlist, save_folder, best_quality)
+
+def download_artist(artist, save_folder='./', best_quality=True):
+    parent_folder = os.path.join(save_folder, u'[艺术家]' + artist.name)
+    if not os.path.exists(parent_folder):
+        os.mkdir(parent_folder)
+    download_albums(artist.albums, parent_folder, best_quality)
+
+def download_artists(artists, save_folder='./', best_quality=True):
+    for artist in artists:
+        download_artist(artist, save_folder, best_quality)
