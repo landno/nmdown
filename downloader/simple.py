@@ -65,7 +65,7 @@ def create_process_func(filename):
     return process_func
 
 def download_song(song, save_folder='./', best_quality=True):
-    filename = '%s - %s.mp3' % (song.artist, song.title)
+    filename = '%s - %s.mp3' % (song.artist, song.title_for_filename)
     filepath = os.path.join(save_folder, filename)
     if os.path.exists(filepath):
         return

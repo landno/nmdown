@@ -113,6 +113,10 @@ class Song(object):
         return self.detail['name']
 
     @property
+    def title_for_filename(self):
+        return self.title.replace('/', ' ')
+
+    @property
     def artist(self):
         return ' & '.join(self.artists)
 
