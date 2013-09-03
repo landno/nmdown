@@ -49,10 +49,14 @@ downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 专辑，下载到文件夹，默认是 ``[专辑]专辑名`` ::
 
     ./nmdown.py http://music.163.com/#/m/album?id=42967
-    
+
 歌单，下载到文件夹，默认是 ``[歌单]歌单名`` ::
 
     ./nmdown.py http://music.163.com/#/m/playlist?id=3020931
+
+艺术家，下载到文件夹，默认是 ``[艺术家]艺术家名/[专辑]专辑名`` ::
+
+    ./nmdown.py http://music.163.com/#/m/artist?id=2842
 
 参数可以多个地址混合使用，默认是最佳音质。
 
