@@ -13,6 +13,7 @@ def read_url(url):
     opener = urllib2.build_opener()
     opener.addheaders = [
         ('User-Agent', 'android'),
+        ('Referer', 'http://music.163.com/'),
         ('Accept-Encoding', 'gzip'),
     ]
     try:
