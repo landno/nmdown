@@ -5,7 +5,7 @@ import os
 import re
 from argparse import ArgumentParser
 from cloudmusic import make_songs, make_albums, make_playlists, make_artists
-from downloader.simple import (
+from downloader.download import (
         download_songs, download_albums, download_playlists, download_artists)
 
 def print_songs(songs, indent=0):
