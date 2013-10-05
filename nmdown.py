@@ -64,9 +64,9 @@ def argparser():
     addarg = parser.add_argument
     addarg('url', metavar='url', nargs='+', type=str,
            help='歌曲/专辑/歌单/艺术家地址')
-    addarg('-q', '--quality', default='best',
-           choices=['default', 'low', 'medium', 'high', 'best'],
-           help='指定音质，默认 best')
+    addarg('-q', '--quality', default='normal',
+           choices=['normal', 'low', 'medium', 'high', 'best'],
+           help='优先下载音质，默认是 normal')
     addarg('-l', '--lyric', action='store_true',
            help='同时下载歌词（如果有）')
     addarg('-o', '--output', type=str, default='./',

@@ -21,12 +21,14 @@ def download_audio(song, config):
         return
 
     quality = config['quality']
-    if quality == 'default':
+    if quality == 'normal':
         remote_url = song.default_mp3_url
     else:
         remote_url = getattr(song, quality + '_quality_mp3_url')
-    local_url = filepath + '.part'
+        if remote_url is None:
+            remote_url = song.default_mp3_url
 
+    local_url = filepath + '.part'
     retrieve_file(remote_url, local_url, filepath)
     fill_tags(local_url, song)
     os.rename(local_url, filepath)

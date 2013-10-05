@@ -58,7 +58,38 @@ downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 
     ./nmdown.py http://music.163.com/#/m/artist?id=2842
 
-参数可以多个地址混合使用，默认是最佳音质。
+参数可以多个地址混合使用。
+
+可选选项
+--------
+
+可通过运行 ``./nmdown.py --help`` 查看可选参数。
+
+音质
+~~~~
+
+``-q 音质名`` 优先下载指定音质，音质名分别为
+
+* low 低音质，码率 96kbp/s
+* medium 中等音质，码率 160kbp/s,
+* high 高音质，码率 256kbp/s 或 320kpb/s，视歌曲而定
+* normal 普通音质，web 播放器的默认音质，相当于 medium，默认下载此音质
+* best 最佳音质，当前歌曲的最高码率音质，相当于 high
+
+有些歌曲不存在 high 音质，best、high、normal 都相当于 medium 音质。
+有些歌曲甚至连 medium 音质也没有，best、high、normal、medium 相当于 low 音质。
+
+歌词
+~~~~
+
+``-l`` 同时下载歌词，创建 lrc 文件。
+
+有些歌词可能没有时间轴。
+
+下载目录
+~~~~~~~~
+
+``-o`` 指定使用的下载目录，如果不存在，则自动创建，默认使用当前目录。
 
 油猴脚本
 ========
