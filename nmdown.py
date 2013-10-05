@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import re
-import sys
+from argparse import ArgumentParser
 from cloudmusic import make_songs, make_albums, make_playlists, make_artists
 from downloader.simple import (
         download_songs, download_albums, download_playlists, download_artists)
@@ -34,29 +35,50 @@ def test():
     playlists = make_playlists(['190990'])
     print_playlists(playlists)
 
-def down(url):
+def down(url, config):
     reg = re.compile('http://music.163.com/#/m/(.+?)\?id=(.+)')
     matches = reg.findall(url)
     if not matches:
         return
 
+    output_folder = config['output']
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
     type, id = matches[0]
     if type == 'song':
         songs = make_songs([id])
-        download_songs(songs)
+        download_songs(songs, config)
     elif type == 'album':
         albums = make_albums([id])
-        download_albums(albums)
+        download_albums(albums, config)
     elif type == 'playlist':
         playlists = make_playlists([id])
-        download_playlists(playlists)
+        download_playlists(playlists, config)
     elif type == 'artist':
         artists = make_artists([id])
-        download_artists(artists)
+        download_artists(artists, config)
+
+def argparser():
+    parser = ArgumentParser(description='网易云音乐批量下载工具')
+    addarg = parser.add_argument
+    addarg('url', metavar='url', nargs='+', type=str,
+           help='歌曲/专辑/歌单/艺术家地址')
+    addarg('-q', '--quality', default='best',
+           choices=['default', 'low', 'medium', 'high', 'best'],
+           help='指定音质，默认 best')
+    addarg('-l', '--lyric', action='store_true',
+           help='同时下载歌词（如果有）')
+    addarg('-o', '--output', type=str, default='./',
+           help='保存目录')
+    return parser
 
 def main():
-    for url in sys.argv[1:]:
-        down(url)
+    args = argparser().parse_args().__dict__
+    urls = args.pop('url')
+    config = args
+    for url in urls:
+        down(url, config)
 
 if __name__ == '__main__':
     main()
