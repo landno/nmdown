@@ -30,7 +30,7 @@ def download_audio(song, config):
 
     local_url = filepath + '.part'
     retrieve_file(remote_url, local_url, filepath)
-    fill_tags(local_url, song)
+    fill_tags(local_url, song, config)
     os.rename(local_url, filepath)
 
 def download_song(song, config):

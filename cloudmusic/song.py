@@ -10,6 +10,8 @@ DETAIL_TPL = 'http://music.163.com/api/song/detail/?ids=[%(ids)s]'
 MEDIA_TPL = 'http://music.163.com/api/song/media?id=%(id)s'
 MP3_TPL = 'http://m1.music.126.net/%(hash)s/%(dfsId)s.mp3'
 
+album_cover_cache = {}
+
 class Song(object):
 
     def __init__(self, id=None):
@@ -151,6 +153,26 @@ class Song(object):
     @property
     def album_publish_datetime(self):
         return timestamp2datetime(self.detail['album']['publishTime'])
+
+    @property
+    def album_cover_url(self):
+        return self.detail['album']['picUrl']
+
+    @property
+    def album_cover_data(self):
+        url = self.album_cover_url
+        if url not in album_cover_cache:
+            data = read_url(url)
+            album_cover_cache[url] = data
+        return album_cover_cache[url]
+
+    @property
+    def album_cover_mimetype(self):
+        png_magic = '\x89PNG\x0d'
+        if self.album_cover_data.startswith(png_magic):
+            return 'image/png'
+        else:
+            return 'image/jpeg'
 
     @property
     def lyric(self):

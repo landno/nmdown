@@ -69,6 +69,8 @@ def argparser():
            help='优先下载音质，默认是 normal')
     addarg('-l', '--lyric', action='store_true',
            help='同时下载歌词（如果有）')
+    addarg('-c', '--cover', action='store_true',
+           help='替换为高分辨率封面')
     addarg('-o', '--output', type=str, default='./',
            help='保存目录')
     return parser
