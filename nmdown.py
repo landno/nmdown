@@ -59,11 +59,18 @@ def down(url, config):
         artists = make_artists([id])
         download_artists(artists, config)
 
+def read_urls_from_file(filename):
+    with open(filename) as file:
+        text = file.read()
+    lines = map(lambda l: l.strip(), text.split('\n'))
+    urls = filter(lambda l: l.startswith('http://'), lines)
+    return urls
+
 def argparser():
     parser = ArgumentParser(description='网易云音乐批量下载工具')
     addarg = parser.add_argument
-    addarg('url', metavar='url', nargs='+', type=str,
-           help='歌曲/专辑/歌单/艺术家地址')
+    addarg('uri', metavar='uri', nargs='+', type=str,
+           help='歌曲/专辑/歌单/艺术家地址，包含地址的文件名')
     addarg('-q', '--quality', default='normal',
            choices=['normal', 'low', 'medium', 'high', 'best'],
            help='优先下载音质，默认是 normal')
@@ -77,7 +84,15 @@ def argparser():
 
 def main():
     args = argparser().parse_args().__dict__
-    urls = args.pop('url')
+    uris = args.pop('uri')
+
+    urls = []
+    for uri in uris:
+        if uri.startswith('http://'):
+            urls.append(uri)
+        else:
+            urls.extend(read_urls_from_file(uri))
+
     config = args
     for url in urls:
         down(url, config)

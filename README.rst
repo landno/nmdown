@@ -58,7 +58,11 @@ downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 
     ./nmdown.py http://music.163.com/#/m/artist?id=2842
 
-参数可以多个地址混合使用。
+或者包含页面地址的本地文件，格式为每行一个 ::
+
+    ./nmdown.py url.txt
+
+参数可以多个地址和文件名混合使用。
 
 可选选项
 --------
