@@ -16,12 +16,10 @@ def read_url(url):
         ('Referer', 'http://music.163.com/'),
         ('Accept-Encoding', 'gzip'),
     ]
-    try:
-        resp = opener.open(url, timeout=3)
-        content = resp.read()
-        if resp.headers.get('content-encoding', None) == 'gzip':
-            content = gzip.GzipFile(fileobj=StringIO.StringIO(content),
-                                    mode='rb').read()
-    except IOError:
-        content = None
+
+    resp = opener.open(url, timeout=3)
+    content = resp.read()
+    if resp.headers.get('content-encoding', None) == 'gzip':
+        content = gzip.GzipFile(fileobj=StringIO.StringIO(content),
+                                mode='rb').read()
     return content
