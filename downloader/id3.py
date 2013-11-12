@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import logging
+logger = logging.getLogger('eyed3.id3.frames')
+logger.setLevel(logging.ERROR)
+
 import eyed3.mp3
 
 def fill_tags(filename, song, config):
