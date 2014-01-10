@@ -6,7 +6,8 @@ import re
 from argparse import ArgumentParser
 from cloudmusic import make_songs, make_albums, make_playlists, make_artists
 from downloader.download import (
-        download_songs, download_albums, download_playlists, download_artists)
+    download_songs, download_albums, download_playlists, download_artists)
+
 
 def print_songs(songs, indent=0):
     for song in songs:
@@ -15,15 +16,18 @@ def print_songs(songs, indent=0):
         print song.id, song.title, song.best_quality_mp3_url
     print
 
+
 def print_albums(albums):
     for album in albums:
         print album.id, album.title
         print_songs(album.songs, 2)
 
+
 def print_playlists(playlists):
     for playlist in playlists:
         print playlist.id, playlist.title
         print_songs(playlist.songs, 2)
+
 
 def test():
     songs = make_songs(['442723', '442727'])
@@ -34,6 +38,7 @@ def test():
 
     playlists = make_playlists(['190990'])
     print_playlists(playlists)
+
 
 def down(url, config):
     reg = re.compile('http://music.163.com/#/(.+?)\?id=(.+)')
@@ -59,12 +64,14 @@ def down(url, config):
         artists = make_artists([id])
         download_artists(artists, config)
 
+
 def read_urls_from_file(filename):
     with open(filename) as file:
         text = file.read()
     lines = map(lambda l: l.strip(), text.split('\n'))
     urls = filter(lambda l: l.startswith('http://'), lines)
     return urls
+
 
 def argparser():
     parser = ArgumentParser(description='网易云音乐批量下载工具')
@@ -82,6 +89,7 @@ def argparser():
            help='保存目录')
     return parser
 
+
 def main():
     args = argparser().parse_args().__dict__
     uris = args.pop('uri')
@@ -96,6 +104,7 @@ def main():
     config = args
     for url in urls:
         down(url, config)
+
 
 if __name__ == '__main__':
     main()

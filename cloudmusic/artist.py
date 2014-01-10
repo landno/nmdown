@@ -7,6 +7,7 @@ from .album import make_albums
 
 DETAIL_TPL = 'http://music.163.com/api/artist/albums/%(id)s?id=%(id)s&offset=0&total=true&limit=1024'
 
+
 class Artist(object):
 
     def __init__(self, id):
@@ -29,6 +30,7 @@ class Artist(object):
     @property
     def name(self):
         return self.detail['artist']['name']
+
 
 def make_artists(ids):
     return [Artist(id) for id in ids]

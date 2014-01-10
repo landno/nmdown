@@ -5,6 +5,7 @@ import sys
 from time import time
 import urllib2
 
+
 def urlretrieve(remote_url, local_url, reporthook=None):
     opener = urllib2.build_opener()
     opener.addheaders = [
@@ -28,6 +29,7 @@ def urlretrieve(remote_url, local_url, reporthook=None):
     local_file.flush()
     local_file.close()
     return (local_url, resp.headers.items())
+
 
 def create_process_func(filename):
 
@@ -61,6 +63,7 @@ def create_process_func(filename):
         sys.stdout.flush()
 
     return process_func
+
 
 def retrieve_file(remote_url, local_url, process_filename):
     urlretrieve(remote_url, local_url, create_process_func(process_filename))

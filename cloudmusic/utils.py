@@ -6,8 +6,10 @@ import urllib2
 import StringIO
 from datetime import datetime
 
+
 def timestamp2datetime(timestamp):
     return datetime.fromtimestamp(timestamp / 1000.0)
+
 
 def read_url(url):
     opener = urllib2.build_opener()

@@ -12,6 +12,7 @@ MP3_TPL = 'http://m1.music.126.net/%(hash)s/%(dfsId)s.mp3'
 
 album_cover_cache = {}
 
+
 class Song(object):
 
     def __init__(self, id=None):
@@ -181,6 +182,7 @@ class Song(object):
         else:
             return None
 
+
 def make_song_with_detail(details):
     songs = []
     for d in details:
@@ -188,6 +190,7 @@ def make_song_with_detail(details):
         song.init_with_detail(d)
         songs.append(song)
     return songs
+
 
 def make_songs(ids):
     url = DETAIL_TPL % dict(ids=','.join(ids))

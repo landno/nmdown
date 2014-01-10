@@ -7,6 +7,7 @@ from .song import make_song_with_detail
 
 DETAIL_TPL = 'http://music.163.com/api/playlist/detail?id=%(id)s'
 
+
 class Playlist(object):
 
     def __init__(self, id):
@@ -36,6 +37,7 @@ class Playlist(object):
     @property
     def tags(self):
         return self.detail['tags']
+
 
 def make_playlists(ids):
     return [Playlist(id) for id in ids]

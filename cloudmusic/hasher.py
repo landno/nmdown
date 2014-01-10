@@ -4,6 +4,7 @@
 from hashlib import md5
 from base64 import b64encode
 
+
 def make_hash(dfsid):
     '''
     计算下载地址的 hash 部分
@@ -17,14 +18,15 @@ def make_hash(dfsid):
 
     hash_codes = []
     for i in xrange(len(fid_codes)):
-        hash_code = (fid_codes[i] ^ key_codes[i % len(key)]) & 0xFF;
-        hash_codes.append(hash_code);
+        hash_code = (fid_codes[i] ^ key_codes[i % len(key)]) & 0xFF
+        hash_codes.append(hash_code)
 
     string = ''.join(map(chr, hash_codes))
     md5_digest = md5(string).digest()
     base64_encoded = b64encode(md5_digest)
     unescape_symbol = base64_encoded.replace('+', '-').replace('/', '_')
     return unescape_symbol
+
 
 def make_hash_details(dfsid):
     '''

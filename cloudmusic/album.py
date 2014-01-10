@@ -7,6 +7,7 @@ from .song import make_song_with_detail
 
 DETAIL_TPL = 'http://music.163.com/api/album/%(id)s'
 
+
 class Album(object):
 
     def __init__(self, id):
@@ -44,6 +45,7 @@ class Album(object):
     @property
     def publish_datetime(self):
         return timestamp2datetime(self.detail['publishTime'])
+
 
 def make_albums(ids):
     return [Album(id) for id in ids]

@@ -7,6 +7,7 @@ logger.setLevel(logging.ERROR)
 
 import eyed3.mp3
 
+
 def fill_tags(filename, song, config):
     tag = eyed3.mp3.Mp3AudioFile(filename).tag
 
