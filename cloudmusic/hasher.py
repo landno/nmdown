@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from hashlib import md5
 from base64 import b64encode
 
@@ -13,17 +10,17 @@ def make_hash(dfsid):
     '''
 
     key = '3go8&$8*3*3h0k(2)2'
-    key_codes = map(ord, list(key))
-    fid_codes = map(ord, list(str(dfsid)))
+    key_codes = list(map(ord, list(key)))
+    fid_codes = list(map(ord, list(str(dfsid))))
 
     hash_codes = []
-    for i in xrange(len(fid_codes)):
+    for i in range(len(fid_codes)):
         hash_code = (fid_codes[i] ^ key_codes[i % len(key)]) & 0xFF
         hash_codes.append(hash_code)
 
     string = ''.join(map(chr, hash_codes))
-    md5_digest = md5(string).digest()
-    base64_encoded = b64encode(md5_digest)
+    md5_digest = md5(string.encode('UTF-8')).digest()
+    base64_encoded = b64encode(md5_digest).decode('UTF-8')
     unescape_symbol = base64_encoded.replace('+', '-').replace('/', '_')
     return unescape_symbol
 

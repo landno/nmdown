@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import json
 from .utils import timestamp2datetime, read_url
 from .hasher import make_hash
@@ -169,7 +166,7 @@ class Song(object):
 
     @property
     def album_cover_mimetype(self):
-        png_magic = '\x89PNG\x0d'
+        png_magic = b'\x89PNG\x0d'
         if self.album_cover_data.startswith(png_magic):
             return 'image/png'
         else:

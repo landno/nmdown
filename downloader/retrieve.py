@@ -1,13 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import sys
 from time import time
-import urllib2
+from urllib import request
 
 
 def urlretrieve(remote_url, local_url, reporthook=None):
-    opener = urllib2.build_opener()
+    opener = request.build_opener()
     opener.addheaders = [
         ('User-Agent', 'stagefright/1.2(proxy)'),
         ('Referer', 'http://music.163.com/api/'),
@@ -46,7 +43,7 @@ def create_process_func(filename):
         percent_text = str(percent) + '%'
 
         bar = (percent * 20) / 100
-        bar_text = '[%-20s]' % ('=' * bar)
+        bar_text = '[{:20s}]'.format('=' * int(bar))
 
         speed = downloaded_size / (time() - start_time) / 1024.0
         speed_text = '%.2fK/s' % speed

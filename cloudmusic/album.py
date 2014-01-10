@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import json
 from .utils import timestamp2datetime, read_url
 from .song import make_song_with_detail

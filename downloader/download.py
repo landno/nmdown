@@ -1,9 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import os
-from id3 import fill_tags
-from retrieve import retrieve_file
+from .id3 import fill_tags
+from .retrieve import retrieve_file
 
 
 def download_lyric(song, config):
@@ -13,7 +10,7 @@ def download_lyric(song, config):
         return
 
     with open(filepath, 'w') as file:
-        file.write(song.lyric.encode('UTF-8'))
+        file.write(song.lyric)
 
 
 def download_audio(song, config):
@@ -48,7 +45,7 @@ def download_songs(songs, config):
 
 
 def download_album(album, config):
-    song_folder = u'[专辑]' + album.title
+    song_folder = '[专辑]' + album.title
     album_folder = os.path.join(config['output'], song_folder)
     if not os.path.exists(album_folder):
         os.mkdir(album_folder)
@@ -64,7 +61,7 @@ def download_albums(albums, config):
 
 
 def download_playlist(playlist, config):
-    song_folder = u'[歌单]' + playlist.title
+    song_folder = '[歌单]' + playlist.title
     playlist_folder = os.path.join(config['output'], song_folder)
     if not os.path.exists(playlist_folder):
         os.mkdir(playlist_folder)
@@ -80,7 +77,7 @@ def download_playlists(playlists, config):
 
 
 def download_artist(artist, config):
-    album_folder = u'[艺术家]' + artist.name
+    album_folder = '[艺术家]' + artist.name
     artist_folder = os.path.join(config['output'], album_folder)
     if not os.path.exists(artist_folder):
         os.mkdir(artist_folder)

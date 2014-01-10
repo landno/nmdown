@@ -1,9 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import gzip
-import urllib2
-import StringIO
+from urllib import request
+from io import BytesIO
 from datetime import datetime
 
 
@@ -12,7 +9,7 @@ def timestamp2datetime(timestamp):
 
 
 def read_url(url):
-    opener = urllib2.build_opener()
+    opener = request.build_opener()
     opener.addheaders = [
         ('User-Agent', 'android'),
         ('Referer', 'http://music.163.com/'),
@@ -22,6 +19,6 @@ def read_url(url):
     resp = opener.open(url, timeout=3)
     content = resp.read()
     if resp.headers.get('content-encoding', None) == 'gzip':
-        content = gzip.GzipFile(fileobj=StringIO.StringIO(content),
-                                mode='rb').read()
+        content = gzip.GzipFile(fileobj=BytesIO(content),
+                                mode='rb').read().decode('UTF-8')
     return content

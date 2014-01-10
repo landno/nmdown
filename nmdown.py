@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 import os
 import re
@@ -12,20 +11,20 @@ from downloader.download import (
 def print_songs(songs, indent=0):
     for song in songs:
         if indent:
-            print ' ' * indent,
-        print song.id, song.title, song.best_quality_mp3_url
-    print
+            print(' ' * indent, end='')
+        print(song.id, song.title, song.best_quality_mp3_url)
+    print()
 
 
 def print_albums(albums):
     for album in albums:
-        print album.id, album.title
+        print(album.id, album.title)
         print_songs(album.songs, 2)
 
 
 def print_playlists(playlists):
     for playlist in playlists:
-        print playlist.id, playlist.title
+        print(playlist.id, playlist.title)
         print_songs(playlist.songs, 2)
 
 
