@@ -78,7 +78,7 @@ var innerFrame = document.querySelector('iframe');
 
 var pages = [
 {
-    url: 'http://music.163.com/#/m/song?id=',
+    url: 'http://music.163.com/#/song?id=',
     handler: function() {
         var songId = location.href.match(/id=([0-9]+)/)[1];
         var downloadLine = this.createDownloadLine(songId);

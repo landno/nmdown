@@ -36,7 +36,7 @@ def test():
     print_playlists(playlists)
 
 def down(url, config):
-    reg = re.compile('http://music.163.com/#/m/(.+?)\?id=(.+)')
+    reg = re.compile('http://music.163.com/#/(.+?)\?id=(.+)')
     matches = reg.findall(url)
     if not matches:
         return
