@@ -2,7 +2,7 @@
 网易云音乐下载脚本
 ##################
 
-包含高音质地址生成算法，见光死的东西，所以你懂的。
+批量下载网易云音乐的歌曲，支持专辑和歌单，也可以下载歌词，补全歌曲标签和替换成清晰封面。
 
 文件内容
 ========
@@ -33,7 +33,7 @@ ID3 Tags
 依赖
 ----
 
-cloudmusic 里的代码仅依赖标准库。
+cloudmusic 里的代码仅依赖 Python 2.7 的标准库。
 
 downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 
@@ -44,19 +44,19 @@ downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 
 单曲，下载到当前目录 ::
 
-    ./nmdown.py http://music.163.com/#/m/song?id=442723
+    ./nmdown.py http://music.163.com/#/song?id=442723
 
 专辑，下载到文件夹，默认是 ``[专辑]专辑名`` ::
 
-    ./nmdown.py http://music.163.com/#/m/album?id=42967
+    ./nmdown.py http://music.163.com/#/album?id=42967
 
 歌单，下载到文件夹，默认是 ``[歌单]歌单名`` ::
 
-    ./nmdown.py http://music.163.com/#/m/playlist?id=3020931
+    ./nmdown.py http://music.163.com/#/playlist?id=3020931
 
 艺术家，下载到文件夹，默认是 ``[艺术家]艺术家名/[专辑]专辑名`` ::
 
-    ./nmdown.py http://music.163.com/#/m/artist?id=2842
+    ./nmdown.py http://music.163.com/#/artist?id=2842
 
 或者包含页面地址的本地文件，格式为每行一个 ::
 
@@ -72,16 +72,21 @@ downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 音质
 ~~~~
 
-``-q 音质名`` 优先下载指定音质，音质名分别为
+``-q 音质名`` 优先下载指定音质，音质名意义如下：
 
-* low 低音质，码率 96kbp/s
-* medium 中等音质，码率 160kbp/s,
-* high 高音质，码率 256kbp/s 或 320kpb/s，视歌曲而定
-* normal 普通音质，web 播放器的默认音质，相当于 medium，默认下载此音质
-* best 最佳音质，当前歌曲的最高码率音质，相当于 high
+码率名
 
-有些歌曲不存在 high 音质，best、high、normal 都相当于 medium 音质。
-有些歌曲甚至连 medium 音质也没有，best、high、normal、medium 相当于 low 音质。
+* ``low`` 低音质，码率 96kbp/s。
+* ``medium`` 中等音质，码率 160kbp/s。
+* ``high`` 高音质，码率 320kpb/s，也有些歌曲是 256kbp/s 或 192kpb/s。
+
+码率别名，其实就是码率名的映射
+
+* ``normal`` 普通音质，web 播放器的默认音质，相当于 ``medium`` ，默认下载此音质。
+* ``best`` 最佳音质，当前歌曲的最高码率音质，相当于 ``high`` 。
+
+有些歌曲不存在 ``high`` 码率，有些甚至连 ``medium`` 都没有，使用码率名会下载不到，
+而使用码率别名会自动降级映射，不会出错。
 
 歌词
 ~~~~
@@ -106,3 +111,8 @@ downloader 依赖 Python 的 eyed3 库来修改 ID3 Tags。
 ========
 
 在歌曲页面上显示各种音质的下载地址和歌词。
+
+许可证
+======
+
+GPLv3
