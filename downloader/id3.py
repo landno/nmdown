@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger('eyed3.id3.frames')
 logger.setLevel(logging.ERROR)
 
-import eyeD3.mp3
+import eyed3.mp3
 
 
 def fill_tags(filename, song, config):
